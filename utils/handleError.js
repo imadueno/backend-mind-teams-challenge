@@ -6,7 +6,7 @@
  * @param {*} code http status code
  */
 
-const handleHttpError = (res, err, internal = "", code = 403) => {
+const handleHttpError = (res, err, internal = "", code = 200) => {
   const message = err.message ?? "ALGO SALIO MAL";
   res.status(code);
   res.send({
