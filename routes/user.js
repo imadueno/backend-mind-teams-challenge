@@ -15,6 +15,7 @@ const {
 /**
  * Las rutas sólo llaman a su controller donde se lleva a cabo
  * toda la lógica
+ * ruta -> validación -> controller
  */
 
 router.get("/", getItemList); // ✅

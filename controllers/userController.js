@@ -1,6 +1,7 @@
 const { userModel } = require("../models");
 const { handleHttpError } = require("../utils/handleError");
 const { matchedData } = require("express-validator");
+const { encrypt } = require("../utils/handleCrypt");
 
 /**
  * obtener a todos los usuarios registrados
@@ -45,8 +46,10 @@ const createItem = async (req, res) => {
     // 2. le pasamos el request, y automaticamente va a limpiar el body
     // 3. retorna el body limpio con los datos de su respectiva validación hecha previamente
 
-    const bodyClean = matchedData(req);
-    const data = await userModel.create(bodyClean);
+    req = matchedData(req);
+    const password = await encrypt(req.password);
+    const body = { ...req, password };
+    const data = await userModel.create(body);
     res.send({ data });
   } catch (err) {
     handleHttpError(res, err, "ERROR_CREATE_USER");
