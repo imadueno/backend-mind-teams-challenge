@@ -9,6 +9,8 @@ This project has been developed with the following tools:
 - dotenv
 - mongoose
 - express-validator
+- bcrypt
+- jsonwebtoken
 
 # Run the project
 ```bash
