@@ -1,3 +1,4 @@
+const { loggerModel } = require("../models");
 /**
  * revisa las peticiones y genera un registro
  * por cada una de ellas en la db
@@ -7,12 +8,20 @@
  * @param {*} next
  */
 
-const logger = (req, res, next) => {
-  const httpMethod = req.method;
+const logger = async (req, res, next) => {
+  const { method } = req;
   const request = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
   const date = new Date();
   const dateString = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-  console.log(`${dateString} | ${httpMethod} | ${request}`);
+
+  const body = {
+    method,
+    request,
+  };
+
+  const data = await loggerModel.create(body);
+  // se visualiza en consola tambien
+  console.log(`${dateString} | ${method} | ${request}`);
   next();
 };
 
