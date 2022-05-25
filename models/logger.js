@@ -6,7 +6,6 @@ const LoggerScheme = new mongoose.Schema(
   {
     method: {
       type: String,
-      unique: true,
     },
     request: {
       type: String,
